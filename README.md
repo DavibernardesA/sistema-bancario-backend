@@ -1,5 +1,4 @@
 # sistema-bancario-backend
-# Sistema Bancário API
 
 [Inserir imagem ou logo do seu projeto aqui]
 
