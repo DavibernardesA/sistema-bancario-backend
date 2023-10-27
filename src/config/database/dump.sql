@@ -11,12 +11,14 @@ create table usuarios (
 create table depositos (
   id serial primary key,
   valor integer not null,
+  data date,
   usuario_id integer not null references usuarios(id)
 );
 
 create table saques (
   id serial primary key,
   valor integer not null,
+  data date,
   usuario_id integer not null references usuarios(id)
 );
 
@@ -25,5 +27,5 @@ create table transferencias (
   usuario_id_origem integer not null references usuarios(id),
   numero_conta_destino integer not null references usuarios(id),
   valor integer not null,
-  senha text
+  data date
 );
