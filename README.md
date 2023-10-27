@@ -105,7 +105,7 @@ Após instalação de pacotes e edição do arquivo "conexao.js", execute o coma
   
   Método **POST**
   
-  ''**/usuario**'' - Recebe  dados do usuário a ser cadastrado pelo corpo da requisição.
+  ''**/usuario**'' - Recebe  dados do usuário a ser cadastrado pelo corpo da requisição com saldo inicial fixo igual a 0.
 
 - Login do usuário:
   
