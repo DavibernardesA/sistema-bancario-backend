@@ -29,6 +29,26 @@ const depositar = async (req, res) => {
   }
 }
 
+const acessarDepositos = async (req, res) => {
+  const usuario = req.user;
+  try {
+    const { rows: depositos, rowCount: numeroDeDepositos } = await pool.query('select * from depositos where usuario_id = $1', [usuario.id])
+
+    if (numeroDeDepositos < 1) {
+      return res.status(404).json({ mensagem: 'Você não tem depositos registrados.' })
+    }
+    const resultado = {
+      numeroDeDepositos: numeroDeDepositos,
+      depositos
+    }
+
+    return res.status(200).json(resultado);
+
+  } catch (error) {
+    return res.status(500).json(chat.error500);
+  }
+}
+
 module.exports = {
   depositar,
   acessarDepositos,
