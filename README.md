@@ -42,5 +42,4 @@ Este é um sistema bancário API que fornece serviços e funcionalidades essenci
 Entre em contato: 
 
 [![Linkedin Badge](https://img.shields.io/badge/-Davi-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/)](https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/) 
-[![Gmail Badge](https://img.shields.io/badge/-davi.10bernardes@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:davi.10bernardes@gmail.com)](davi.10bernardes@gmail.com)
-
+[![Gmail Badge](https://img.shields.io/badge/-davi.10bernardes@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:davi.10bernardes@gmail.com)](mailto:davi.10bernardes@gmail.com)
