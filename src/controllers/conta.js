@@ -81,6 +81,26 @@ const sacar = async (req, res) => {
   }
 }
 
+const acessarSaques = async (req, res) => {
+  const usuario = req.user;
+  try {
+    const { rows: saques, rowCount: numeroDeSaques } = await pool.query('select * from saques where usuario_id = $1', [usuario.id])
+
+    if (numeroDeSaques < 1) {
+      return res.status(404).json({ mensagem: 'Você não tem saques registrados.' })
+    }
+
+    const resultado = {
+      numeroDeSaques: numeroDeSaques,
+      saques
+    }
+
+    return res.status(200).json(resultado);
+
+  } catch (error) {
+    return res.status(500).json(chat.error500);
+  }
+}
 
 module.exports = {
   depositar,
