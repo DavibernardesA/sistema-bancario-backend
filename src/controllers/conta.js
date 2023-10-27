@@ -49,6 +49,39 @@ const acessarDepositos = async (req, res) => {
   }
 }
 
+const sacar = async (req, res) => {
+  const usuario = req.user;
+  const usuario_id = usuario.id;
+  const { valor } = req.body;
+  const dataAtual = obterDataAtual();
+
+  if (!valor) {
+    return res.status(400).json(chat.error400);
+  }
+
+  if (valor < 1) {
+    return res.status(400).json({ mensagem: 'O valor do saque deve exceder zero.' })
+  }
+
+  if (valor > usuario.saldo) {
+    return res.status(400).json({ mensagem: 'Saldo insuficiente para realizar o saque.' });
+  }
+
+  try {
+    const saque = await pool.query('insert into saques (valor, data, usuario_id) values ($1, $2, $3)', [valor, dataAtual, usuario_id,]);
+
+    const novoSaldo = usuario.saldo - valor;
+    await pool.query('UPDATE usuarios SET saldo = $1 WHERE id = $2', [novoSaldo, usuario_id]);
+
+    return res.status(204).json();
+
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json(chat.error500);
+  }
+}
+
+
 module.exports = {
   depositar,
   acessarDepositos,
