@@ -1,4 +1,4 @@
-create database projetoSistemaBancario;
+create database projetosistemabancario;
 
 create table usuarios (
   id serial primary key,
