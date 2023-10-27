@@ -18,14 +18,12 @@ Este é um sistema bancário API que fornece serviços e funcionalidades essenci
 - Fazer Login 
 - Detalhar Perfil do Usuário Logado 
 - Editar Perfil do Usuário Logado 
-- Listar categorias 
-- Listar transações 
-- Detalhar transação 
-- Cadastrar transação 
-- Editar transação 
-- Remover transação 
-- Obter extrato de transações 
-- Filtrar transações por categoria 
+- Excluir Perfil do Usuário Logado
+- Depositar em uma conta bancária
+- Sacar de uma conta bancária
+- Transferir valores entre contas bancárias
+- Consultar saldo da conta bancária
+- Emitir extrato de uma conta bancária
 
 ## Como Usar👆
 [Forneça instruções detalhadas sobre como usar sua API. Inclua exemplos de solicitações e respostas, rotas disponíveis e qualquer outra informação relevante.]
