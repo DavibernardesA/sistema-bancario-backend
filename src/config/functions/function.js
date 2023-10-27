@@ -1,5 +1,9 @@
-const funcao = (req, res) => {
-  return res.json('tudo certo.')
+function obterDataAtual() {
+  const data = new Date();
+  return data.toLocaleString('pt-BR');
 }
 
-module.exports = funcao;
+module.exports = {
+  obterDataAtual,
+
+}
