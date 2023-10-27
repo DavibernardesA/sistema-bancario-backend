@@ -10,8 +10,9 @@ const cadastrarUsuario = async (req, res) => {
   try {
     const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-    const { rows: usuariosCadastrados } = await pool.query('insert into usuarios (nome, email, senha) values ($1, $2, $3) returning *', [nome,
-      email, senhaCriptografada]);
+    const saldo = 0;
+    const { rows: usuariosCadastrados } = await pool.query('insert into usuarios (nome, email, senha, saldo) values ($1, $2, $3, $4) returning *', [nome,
+      email, senhaCriptografada, saldo]);
 
     const usuarioCadastrado = usuariosCadastrados[0];
     delete usuarioCadastrado.senha;
