@@ -157,6 +157,49 @@ const acessarSaldo = (req, res) => {
   }
 }
 
+const emitirExtrato = async (req, res) => {
+  const usuario = req.user;
+
+  try {
+    const saldo = usuario.saldo;
+
+    const { rows: transferenciasEmitidas } = await pool.query(
+      'select * from transferencias where usuario_id_origem = $1',
+      [usuario.id]
+    );
+
+    const { rows: transferenciasRecebidas } = await pool.query(
+      'select * from transferencias where numero_conta_destino = $1',
+      [usuario.id]
+    );
+
+    const { rows: depositos } = await pool.query(
+      'select * from depositos where usuario_id = $1',
+      [usuario.id]
+    );
+
+    const { rows: saques } = await pool.query(
+      'select * from saques where usuario_id = $1',
+      [usuario.id]
+    );
+
+    const numeroDeMovimentacoes = transferenciasEmitidas.length + transferenciasRecebidas.length + depositos.length + saques.length;
+
+    const extrato = {
+      numeroDeMovimentacoes: numeroDeMovimentacoes,
+      saldo,
+      transferenciasEmitidas,
+      transferenciasRecebidas,
+      depositos,
+      saques,
+    };
+
+    return res.status(200).json(extrato);
+  } catch (error) {
+    return res.status(500).json(chat.error500);
+  }
+};
+
 module.exports = {
   depositar,
   acessarDepositos,
