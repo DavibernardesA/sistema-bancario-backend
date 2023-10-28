@@ -5,7 +5,7 @@
 <table>
   <tr>
     <td>
-      <img src="SUA IMAGEM AQUI" alt="" style="width: 100%; height: auto;">
+      <img src="https://github.com/DavibernardesA/sistema-bancario-backend/assets/133716733/b8f4c9aa-191c-4956-b167-f60a2c10a973" alt="" style="width: 100%; height: auto;">
       <div style="text-align: center;">Funcionalidades no Insomnia</div>
     </td>
     <td>
@@ -18,7 +18,17 @@
 ## Descrição
 Este é um sistema bancário API que fornece serviços e funcionalidades essenciais para uma aplicação financeira. Foi desenvolvido como parte do meu portfólio para demonstrar minhas habilidades na criação de APIs.
 
+<table>
+  <tr>
+    <td>
+      <img src="https://github.com/DavibernardesA/sistema-bancario-backend/assets/133716733/41ffcd74-3fa1-49ba-9c4d-0cbd0adeb294" alt="" style="width: 50%; height: auto;">
+    </td>
+    
+  </tr>
+</table>
+
 ## Técnicas e tecnologias utilizadas🛠️
+
 - [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
 
@@ -133,38 +143,83 @@ Após instalação de pacotes e edição do arquivo "conexao.js", execute o coma
 ## Rotas e Endpoints - Usuário
 
 - Cadastro de usuário:
-  
+
   Método **POST**
   
-  ''**/usuario**'' - Recebe  dados do usuário a ser cadastrado pelo corpo da requisição com saldo inicial fixo igual a 0.
+  **/usuario** - Recebe dados do usuário a ser cadastrado pelo corpo da requisição com saldo inicial fixo igual a 0.
 
 - Login do usuário:
-  
+
   Método **POST**
-  
-  "**/login**" - Recebe email e senha cadastrados pelo usuário fazendo validações. Para efetuar o login a API valida a senha informada no corpo da requisição da rota com a HASH criada pelo pacote "secure-password" que está guardada no banco de dados como a "senha" do usuário. Ao validar as informações, o pacote "jsonwebtoken" cria um elemento "token" que será usado para transmitir as informações do usuário para outras rotas.
+
+  **/login** - Recebe email e senha cadastrados pelo usuário fazendo validações. Para efetuar o login a API valida a senha informada no corpo da requisição da rota com a HASH criada pelo pacote "secure-password" que está guardada no banco de dados como a "senha" do usuário. Ao validar as informações, o pacote "jsonwebtoken" cria um elemento "token" que será usado para transmitir as informações do usuário para outras rotas.
 
 - Autenticação:
-  
-    O arquivo "pessoaLogada.js" é um middleware responsável pela criação do "token" no momento do **Login**. Este token é utilizado para fazer a autenticação do usuário para que possa acessar **todas** rotas exceto: "/cadastrar" e "/login".
 
-Visualizar perfil do usuário:
-  
-  Método **GET** 
-  
-  "**/perfil**" - Responde a requisição mostrando os dados do usuário recebidos pela requisição e suas publicações.
+  O arquivo "pessoaLogada.js" é um middleware responsável pela criação do "token" no momento do **Login**. Este token é utilizado para fazer a autenticação do usuário para que possa acessar **todas** as rotas, exceto: "/cadastrar" e "/login".
 
-  - Editar cadastro do usuário:
-  
+- Visualizar perfil do usuário:
+
+  Método **GET**
+
+  **/perfil** - Responde a requisição mostrando os dados do usuário recebidos pela requisição e suas publicações.
+
+- Editar cadastro do usuário:
+
   Método **PUT**
-  
-  "**/perfil**" - Recebe as informações do usuário através do "token" criado quando o usuário efetua o login, e permite alteração do cadastro no banco de dados. **A edição de todos os campos são obrigatórias**.
+
+  **/perfil** - Recebe as informações do usuário através do "token" criado quando o usuário efetua o login e permite a alteração do cadastro no banco de dados. **A edição de todos os campos é obrigatória**.
 
 - Excluir cadastro do usuário:
-  
+
   Método **DELETE**
-  
-  "**/perfil/delete**" - Recebe as informações do usuário através do "token" criado quando usuário efetua o login. Permite o usuário excluir seu cadastro do  banco de dados.
+
+  **/perfil/delete** - Recebe as informações do usuário através do "token" criado quando o usuário efetua o login. Permite ao usuário excluir seu cadastro do banco de dados com senha e confirmação da senha.
+
+## Rotas e Endpoints - Conta
+
+- Depositar:
+
+  Método **POST**
+
+  **/depositar** - Permite ao usuário realizar um depósito em sua conta. O valor do depósito deve ser maior que zero.
+
+- Acessar Depósitos:
+
+  Método **GET**
+
+  **/acessar-depositos** - Retorna a lista de depósitos feitos pelo usuário, incluindo o número total de depósitos.
+
+- Sacar:
+
+  Método **POST**
+
+  **/sacar** - Permite ao usuário fazer um saque de sua conta, desde que tenha saldo suficiente. O valor do saque deve ser maior que zero.
+
+- Acessar Saques:
+
+  Método **GET**
+
+  **/acessar-saques** - Retorna a lista de saques realizados pelo usuário, incluindo o número total de saques.
+
+- Transferir:
+
+  Método **POST**
+
+  **/transferir** - Permite ao usuário transferir um valor para outro usuário. O valor da transferência deve ser maior que zero e o usuário de destino deve existir. O saldo do remetente será atualizado após a transferência.
+
+- Acessar Saldo:
+
+  Método **GET**
+
+  **/acessar-saldo** - Retorna o saldo atual do usuário.
+
+- Emitir Extrato:
+
+  Método **GET**
+
+  **/emitir-extrato** - Retorna um extrato contendo informações sobre o saldo, transferências emitidas, transferências recebidas, depósitos, saques e o número total de moviment
+
 
 
 
