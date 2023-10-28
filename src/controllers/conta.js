@@ -20,11 +20,12 @@ const depositar = async (req, res) => {
     const deposito = await pool.query('insert into depositos (valor, data, usuario_id) values ($1, $2, $3)', [valor, dataAtual, usuario_id]);
 
     const novoSaldo = usuario.saldo + valor;
-    const atualizarSaldo = await pool.query('update usuarios set saldo = saldo + $1 where id = $2', [novoSaldo, usuario_id]);
+    const atualizarSaldo = await pool.query('update usuarios set saldo = $1 where id = $2', [novoSaldo, usuario_id]);
 
     return res.status(204).json();
 
   } catch (error) {
+    console.log(error.message);
     return res.status(500).json(chat.error500);
   }
 }
@@ -71,7 +72,7 @@ const sacar = async (req, res) => {
     const saque = await pool.query('insert into saques (valor, data, usuario_id) values ($1, $2, $3)', [valor, dataAtual, usuario_id,]);
 
     const novoSaldo = usuario.saldo - valor;
-    await pool.query('UPDATE usuarios SET saldo = $1 WHERE id = $2', [novoSaldo, usuario_id]);
+    await pool.query('update usuarios set saldo = $1 where id = $2', [novoSaldo, usuario_id]);
 
     return res.status(204).json();
 
@@ -102,9 +103,56 @@ const acessarSaques = async (req, res) => {
   }
 }
 
+const transferir = async (req, res) => {
+  const usuario = req.user;
+  const { valor, destinatario_id } = req.body;
+  const remetente_id = usuario.id;
+  const dataAtual = obterDataAtual();
+
+  if (!valor || !destinatario_id) {
+    return res.status(400).json(chat.error400);
+  }
+
+  if (valor < 1) {
+    return res.status(400).json({ mensagem: 'O valor do saque deve exceder zero.' })
+  }
+
+  const { rows: destinatario } = await pool.query('select saldo from usuarios where id = $1', [destinatario_id]);
+
+  if (destinatario.length === 0) {
+    return res.status(404).json({ mensagem: 'Destinatário não encontrado.' });
+  }
+
+  try {
+
+    const saldoRemetente = usuario.saldo;
+
+    if (valor > saldoRemetente) {
+      return res.status(400).json({ mensagem: 'Saldo insuficiente para realizar a transferência.' });
+    }
+
+    await pool.query('insert into transferencias (usuario_id_origem, numero_conta_destino, valor, data) values ($1, $2, $3, $4)', [remetente_id, destinatario_id, valor, dataAtual]);
+
+    const novoSaldoRemetente = saldoRemetente - valor;
+    await pool.query('update usuarios set saldo = $1 where id = $2', [novoSaldoRemetente, remetente_id]);
+
+    const saldoDestinatario = destinatario[0].saldo;
+    const novoSaldoDestinatario = saldoDestinatario + valor;
+
+    await pool.query('update usuarios set saldo = $1 where id = $2', [novoSaldoDestinatario, destinatario_id]);
+
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).json(chat.error500);
+  }
+};
+
 module.exports = {
   depositar,
   acessarDepositos,
   sacar,
-  acessarSaques
+  acessarSaques,
+  transferir,
+  acessarSaldo,
+  emitirExtrato
 }

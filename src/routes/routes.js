@@ -18,5 +18,8 @@ rotas.put('/depositar', conta.depositar);
 rotas.get('/perfil/depositos', conta.acessarDepositos);
 rotas.post('/sacar', conta.sacar);
 rotas.get('/perfil/saques', conta.acessarSaques);
+rotas.post('/transferir', conta.transferir);
+rotas.get('/perfil/saldo', conta.acessarSaldo);
+rotas.get('/perfil/extrato', conta.emitirExtrato);
 
 module.exports = rotas;
