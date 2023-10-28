@@ -147,6 +147,16 @@ const transferir = async (req, res) => {
   }
 };
 
+const acessarSaldo = (req, res) => {
+  try {
+    const saldo = req.user.saldo;
+    return res.status(200).json(saldo);
+
+  } catch (error) {
+    return res.status(500).json(chat.error500);
+  }
+}
+
 module.exports = {
   depositar,
   acessarDepositos,
