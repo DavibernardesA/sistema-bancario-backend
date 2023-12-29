@@ -21,9 +21,8 @@ Este é um sistema bancário API que fornece serviços e funcionalidades essenci
 <table>
   <tr>
     <td>
-      <img src="https://github.com/DavibernardesA/sistema-bancario-backend/assets/133716733/41ffcd74-3fa1-49ba-9c4d-0cbd0adeb294" alt="" style="width: 50%; height: auto;">
+    <img src="https://github.com/DavibernardesA/sistema-bancario-backend/assets/133716733/786191a4-97fb-4315-9445-d239cf115821"alt="" style="width: 50%; height: auto;" />
     </td>
-    
   </tr>
 </table>
 
@@ -145,7 +144,7 @@ Após instalação de pacotes e edição do arquivo "conexao.js", execute o coma
 - Cadastro de usuário:
 
   Método **POST**
-  
+
   **/usuario** - Recebe dados do usuário a ser cadastrado pelo corpo da requisição com saldo inicial fixo igual a 0.
 
 - Login do usuário:
@@ -223,15 +222,15 @@ Após instalação de pacotes e edição do arquivo "conexao.js", execute o coma
 
 
 
-## Autor✍️ 
+## Autor✍️
 
 <a href=https://github.com/DavibernardesA>
 <img src="https://github.com/DavibernardesA/sistema-bancario-backend/assets/133716733/6ba09c22-9eae-4601-980c-81533bd7b4f9" width="100px;" alt=""/>
 <br>
 <b>Davi Bernardes</b></a>
 <br/>
-Entre em contato: 
+Entre em contato:
 
 
-[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/)](https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/)](https://www.linkedin.com/in/davi-bernardes-do-nascimento-7b62a4274/)
 [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:davi.10bernardes@gmail.com)](mailto:davi.10bernardes@gmail.com)

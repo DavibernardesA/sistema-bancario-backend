@@ -14,20 +14,18 @@ const usuarioLogado = async (req, res, next) => {
   try {
     const { id } = jwt.verify(token, senhaJwt);
 
-    const rows = await knex('usuarios').where('id', id).select('*');
+    const usuario = await knex('usuarios').where({ id }).select('*').first();
 
-    if (rows.length < 1) {
+    if (!usuario) {
       return res.status(401).json({ message: 'Não autorizado.' });
     }
 
-    req.user = rows[0];
+    req.user = usuario;
 
     next();
   } catch (error) {
     return res.status(500).json({ message: 'Não autorizado.' });
   }
-}
-
-module.exports = {
-  usuarioLogado
 };
+
+module.exports = usuarioLogado;

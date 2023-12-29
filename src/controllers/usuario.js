@@ -8,6 +8,15 @@ const cadastrarUsuario = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
+    const usuarioExistente = await knex('usuarios')
+      .where({ nome })
+      .orWhere({ email })
+      .first();
+
+    if (usuarioExistente) {
+      return res.status(400).json(chat.error400)
+    }
+
     const senhaCriptografada = await bcrypt.hash(senha, 10);
 
     const saldo = 0;
@@ -20,14 +29,17 @@ const cadastrarUsuario = async (req, res) => {
     return res.status(201).json(usuarioCadastrado);
 
   } catch (error) {
-    console.log(error.message);
-    return res.json(chat.error500);
+    console.error(error.message);
+    return res.status(500).json(chat.error500);
   }
-}
+};
+
 
 const perfil = (req, res) => {
   try {
-    return res.status(200).json(req.user);
+    const usuario = req.user
+    delete usuario.senha
+    return res.status(200).json(usuario);
   } catch (error) {
     return res.status(500).json(chat.error500);
   }
@@ -53,7 +65,7 @@ const editarPerfil = async (req, res) => {
         senha: usuarioObj.senha,
       });
 
-    return res.status(201).json(req.user);
+    return res.status(201).json(chat.status201);
 
   } catch (error) {
     return res.status(500).json(chat.error500);
@@ -70,7 +82,7 @@ const deletarPerfil = async (req, res) => {
   }
 
   try {
-    const [usuarioCadastrado] = await knex('usuarios').where('id', id);
+    const [usuarioCadastrado] = await knex('usuarios').where({ id });
 
     if (!usuarioCadastrado) {
       return res.status(404).json(chat.error404);
@@ -82,7 +94,7 @@ const deletarPerfil = async (req, res) => {
       return res.status(401).json(chat.error401);
     }
 
-    await knex('usuarios').where('id', id).del();
+    await knex('usuarios').where({ id }).del();
 
     return res.status(204).json();
 
@@ -103,7 +115,7 @@ const usuarioLogado = async (req, res, next) => {
   try {
     const { id } = jwt.verify(token, senhaJwt);
 
-    const [usuarioCadastrado] = await knex('usuarios').where('id', id);
+    const [usuarioCadastrado] = await knex('usuarios').where({ id });
 
     if (!usuarioCadastrado) {
       return res.status(401).json({ message: 'Não autorizado.' });

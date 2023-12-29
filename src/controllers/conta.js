@@ -22,7 +22,7 @@ const depositar = async (req, res) => {
     const novoSaldo = usuario.saldo + valor;
     await knex('usuarios').where({ id: usuario_id }).update({ saldo: novoSaldo });
 
-    return res.status(204).json();
+    return res.status(201).json(chat.status201);
 
   } catch (error) {
     console.log(error.message);
@@ -40,7 +40,7 @@ const acessarDepositos = async (req, res) => {
     }
 
     const resultado = {
-      numeroDeDepositos: depositos.length,
+      "Número de depositos": depositos.length,
       depositos,
     };
 
@@ -75,7 +75,7 @@ const sacar = async (req, res) => {
     const novoSaldo = usuario.saldo - valor;
     await knex('usuarios').where({ id: usuario_id }).update({ saldo: novoSaldo });
 
-    return res.status(204).json();
+    return res.status(201).json(chat.status201);
 
   } catch (error) {
     console.log(error.message);
