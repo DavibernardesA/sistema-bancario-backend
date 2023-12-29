@@ -1,3 +1,5 @@
+const Knex = require("knex");
+
 const validarCadastro = async (req, res, next) => {
   const { nome, email, senha } = req.body;
 
@@ -5,11 +7,15 @@ const validarCadastro = async (req, res, next) => {
     return res.status(400).json({ mensagem: 'Todos os campos são obrigatórios.' });
   }
 
-  const { rowCount: emailCadastrado } = await pool.query('select * from usuarios where email = $1', [email]);
+  const { rowCount: emailCadastrado } = await Knex('usuarios').where({ email });
 
   if (emailCadastrado) {
     return res.status(400).json(chat.error400);
   }
 
   next()
+}
+
+module.exports = {
+  validarCadastro
 }
