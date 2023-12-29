@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const usuario = require('../controllers/usuario');
 const conta = require('../controllers/conta');
