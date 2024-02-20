@@ -111,27 +111,20 @@ npm install para instalar pacotes utilizados para construção desta API:
 
 ## IMPORTANTE!
 
-No arquivo "conexao.js" presente na pasta "src" será necessário editar as informações de usuário necessárias para acessar o banco de dados local:
+Na raiz do projeto crie um arquivo chamado ".env", será necessário editar as informações de usuário para acessar o banco de dados local:
 
 ```
-const { Pool } = require('pg');
+PORT=
 
-const pool = new Pool({
-  user: "SEU USUÁRIO AQUI",
-  host: "localhost",
-  database: "projetosistemabancario",
-  password: "SUA SENHA AQUI",
-  port: 5432
-});
+DB_HOST=
+DB_PORT=
+DB_NAME=
+DB_USER=
+DB_PASS=
 
-const query = (text, param)=>{
-  return pool.query(text, param);
-}
-
-module.exports = { query }
 ```
 
-Após instalação de pacotes e edição do arquivo "conexao.js", execute o comando:
+Após instalação de pacotes e criação do arquivo ".env", execute o comando:
 
     npm run dev
 
